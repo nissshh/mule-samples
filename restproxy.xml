@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:http="http://www.mulesoft.org/schema/mule/http" 
+xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" 
+xmlns="http://www.mulesoft.org/schema/mule/core" 
+xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <apikit:config name="Router" raml="api.raml" consoleEnabled="true" consolePath="console" doc:name="Router">
+        <!-- <apikit:flow-mapping resource="get:/aoaRequest" action="get" flow-ref="getAOARequest"/>
+        <apikit:flow-mapping resource="/aoaRequest" action="post" flow-ref="postAOARequest"/> -->
+    </apikit:config>
+    <!-- https://aoa-ws-direct-cat.earlywarning.com/AOAInquiryService/services/AOAInquiryService -->
+    <ws:consumer-config name="Web_Service_Consumer1" wsdlLocation="AOAInquiryService.wsdl" service="post" port="EnhancedAOAInquiryResourceSoap11" serviceAddress="http://DTCVDI-SS8-0614:9090/" doc:name="Web Service Consumer"/>
+    <http:listener-config name="HTTP_Listener_Configuration1" host="0.0.0.0" port="8082" doc:name="HTTP Listener Configuration"/>
+    <cxf:configuration name="CXF_Configuration" enableMuleSoapHeaders="true" initializeStaticBusInstance="true" doc:name="CXF Configuration"/>
+    <flow name="restproxyFlow-main">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="fraudService/api/*" doc:name="HTTP"/>
+        <logger level="INFO" doc:name="Logger"/>
+        <apikit:router config-ref="Router" doc:name="APIkit Router"/>
+        <logger level="INFO" doc:name="Logger"/>
+    </flow>
+    <flow name="get:/aoaRequest:Router">
+        <set-payload value="Response from a GET Request" doc:name="Set GET Payload"/>
+   
+    </flow>
+    <flow name="post:/aoaRequest:Router">
+       
+   <dw:transform-message metadata:id="85897ba1-99b4-4f56-ac67-408cf48b7a8b" doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/xml
+%namespace ns0 http://www.earlywarning.com/aoa/ws/request/v4_0_0
+---
+{
+	ns0#AOARequest @(Version: payload.AOARequest.Version , Product: payload.AOARequest.Product , Source: payload.AOARequest.Source): {
+		ns0#Inquiry: {
+			ns0#PrimID: payload.AOARequest.Inquiry.PrimID,
+			ns0#SecID: payload.AOARequest.Inquiry.SecID,
+			ns0#AddID: payload.AOARequest.Inquiry.AddID,
+			ns0#AddID4: payload.AOARequest.Inquiry.AddID4,
+			ns0#AddID5: payload.AOARequest.Inquiry.AddID5,
+			ns0#AddID6: payload.AOARequest.Inquiry.AddID6,
+			ns0#AddID7: payload.AOARequest.Inquiry.AddID7,
+			ns0#AddID8: payload.AOARequest.Inquiry.AddID8,
+			ns0#AddID9: payload.AOARequest.Inquiry.AddID9,
+			ns0#AddID10: payload.AOARequest.Inquiry.AddID10,
+			ns0#UserID: payload.AOARequest.Inquiry.UserID,
+			ns0#RTN: payload.AOARequest.Inquiry.RTN,
+			ns0#AcctNo: payload.AOARequest.Inquiry.AcctNo,
+			ns0#FeeAttrib: payload.AOARequest.Inquiry.FeeAttrib,
+			ns0#PCTranCode: payload.AOARequest.Inquiry.PCTranCode,
+			ns0#Amount: payload.AOARequest.Inquiry.Amount,
+			ns0#SerialNo: payload.AOARequest.Inquiry.SerialNo,
+			ns0#CreditABA: payload.AOARequest.Inquiry.CreditABA,
+			ns0#CreditAccount: payload.AOARequest.Inquiry.CreditAccount,
+			ns0#AcctOwner: {
+				ns0#FName: payload.AOARequest.Inquiry.AcctOwner.FName,
+				ns0#LName: payload.AOARequest.Inquiry.AcctOwner.LName,
+				ns0#MName: payload.AOARequest.Inquiry.AcctOwner.MName,
+				ns0#NamePfx: payload.AOARequest.Inquiry.AcctOwner.NamePfx,
+				ns0#NameSfx: payload.AOARequest.Inquiry.AcctOwner.NameSfx,
+				ns0#BusName: payload.AOARequest.Inquiry.AcctOwner.BusName,
+				ns0#Address1: payload.AOARequest.Inquiry.AcctOwner.Address1,
+				ns0#Address2: payload.AOARequest.Inquiry.AcctOwner.Address2,
+				ns0#City: payload.AOARequest.Inquiry.AcctOwner.City,
+				ns0#State: payload.AOARequest.Inquiry.AcctOwner.State,
+				ns0#Zip: payload.AOARequest.Inquiry.AcctOwner.Zip,
+				ns0#HmPhone: payload.AOARequest.Inquiry.AcctOwner.HmPhone as :number,
+				ns0#WkPhone: payload.AOARequest.Inquiry.AcctOwner.WkPhone as :number,
+				ns0#SSN: payload.AOARequest.Inquiry.AcctOwner.SSN,
+				ns0#DOB: payload.AOARequest.Inquiry.AcctOwner.DOB as :number,
+				ns0#IDType: payload.AOARequest.Inquiry.AcctOwner.IDType,
+				ns0#IDNo: payload.AOARequest.Inquiry.AcctOwner.IDNo,
+				ns0#IDState: payload.AOARequest.Inquiry.AcctOwner.IDState
+			},
+			ns0#Client: {
+				ns0#ClientDt: payload.AOARequest.Inquiry.Client.ClientDt,
+				ns0#ClientTime: payload.AOARequest.Inquiry.Client.ClientTime,
+				ns0#UserDef: payload.AOARequest.Inquiry.Client.UserDef
+			}
+		}
+	}
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <logger level="INFO" doc:name="Logger"/>
+         
+        <ws:consumer config-ref="Web_Service_Consumer1" operation="AOA" doc:name="Web Service Consumer"/>
+        <logger level="INFO" doc:name="Logger"/>
+        <dw:transform-message metadata:id="aec558ab-98d5-4f63-8501-305d28579db6" doc:name="Transform Message" doc:description="Transforms from JSON Request To AOA Rquest">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+%namespace ns0 http://www.earlywarning.com/aoa/ws/response/v4_0_0
+---
+{
+	AOAResponse: {
+		Result: {
+			RequestContext: payload.ns0#AOAResponse.ns0#Result.ns0#RequestContext,
+			ErrorCd: payload.ns0#AOAResponse.ns0#Result.ns0#ErrorCd as :string,
+			PrimID: payload.ns0#AOAResponse.ns0#Result.ns0#PrimID,
+			SecID: payload.ns0#AOAResponse.ns0#Result.ns0#SecID,
+			AddID: payload.ns0#AOAResponse.ns0#Result.ns0#AddID,
+			AddID4: payload.ns0#AOAResponse.ns0#Result.ns0#AddID4,
+			AddID5: payload.ns0#AOAResponse.ns0#Result.ns0#AddID5,
+			AddID6: payload.ns0#AOAResponse.ns0#Result.ns0#AddID6,
+			AddID7: payload.ns0#AOAResponse.ns0#Result.ns0#AddID7,
+			AddID8: payload.ns0#AOAResponse.ns0#Result.ns0#AddID8,
+			AddID9: payload.ns0#AOAResponse.ns0#Result.ns0#AddID9,
+			AddID10: payload.ns0#AOAResponse.ns0#Result.ns0#AddID10,
+			UserID: payload.ns0#AOAResponse.ns0#Result.ns0#UserID,
+			RTN: payload.ns0#AOAResponse.ns0#Result.ns0#RTN,
+			AcctNo: payload.ns0#AOAResponse.ns0#Result.ns0#AcctNo,
+			FeeAttrib: payload.ns0#AOAResponse.ns0#Result.ns0#FeeAttrib,
+			PCTranCode: payload.ns0#AOAResponse.ns0#Result.ns0#PCTranCode,
+			Amount: payload.ns0#AOAResponse.ns0#Result.ns0#Amount as :string,
+			SerialNo: payload.ns0#AOAResponse.ns0#Result.ns0#SerialNo as :string,
+			CreditABA: payload.ns0#AOAResponse.ns0#Result.ns0#CreditABA,
+			CreditAccount: payload.ns0#AOAResponse.ns0#Result.ns0#CreditAccount,
+			DataSource: payload.ns0#AOAResponse.ns0#Result.ns0#DataSource,
+			AccountType: payload.ns0#AOAResponse.ns0#Result.ns0#AccountType,
+			AcctOwner: {
+				CondCd: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#CondCd,
+				NameMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#NameMtch,
+				FNameMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#FNameMtch,
+				LNameMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#LNameMtch,
+				MNameMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#MNameMtch,
+				NamePfxMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#NamePfxMtch,
+				NameSfxMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#NameSfxMtch,
+				BusNameMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#BusNameMtch,
+				FullAddressMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#FullAddressMtch,
+				AddressMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#AddressMtch,
+				CityMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#CityMtch,
+				StateMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#StateMtch,
+				ZipMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#ZipMtch,
+				HmPhoneMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#HmPhoneMtch,
+				WkPhoneMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#WkPhoneMtch,
+				SSNMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#SSNMtch,
+				DOBMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#DOBMtch,
+				IDTypeMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#IDTypeMtch,
+				IDNoMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#IDNoMtch,
+				IDStateMtch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#IDStateMtch,
+				OverallMtchScore: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#OverallMtchScore as :string,
+				SignerOwnerMatch: payload.ns0#AOAResponse.ns0#Result.ns0#AcctOwner.ns0#SignerOwnerMatch
+			},
+			ResultCode: payload.ns0#AOAResponse.ns0#Result.ns0#ResultCode
+		}
+	}
+}]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+   <!--  <flow name="restproxyFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration1" path="/" doc:name="HTTP"/>
+        <cxf:simple-service configuration-ref="CXF_Configuration" serviceClass="com.wf.fx.fraud.service.AOAService" doc:name="CXF"/>
+    </flow> -->
+
+</mule>
