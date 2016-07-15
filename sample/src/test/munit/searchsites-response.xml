@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns14:searchSitesResponse
+	xmlns:ns2="http://service.wellsfargo.com/entity/message/2003/"
+	xmlns:ns4="http://service.wellsfargo.com/entity/outlet/2003/"
+	xmlns:ns3="http://service.wellsfargo.com/entity/communication/address/2003/"
+	xmlns:ns6="http://service.wellsfargo.com/entity/site/2003/"
+	xmlns:ns5="http://service.wellsfargo.com/entity/communication/phone/2003/"
+	xmlns:ns8="http://service.wellsfargo.com/entity/product/2003/"
+	xmlns:ns7="http://service.wellsfargo.com/provider/FSL/shared/2016/"
+	xmlns:ns13="http://service.wellsfargo.com/entity/communication/email/2003/"
+	xmlns:ns9="http://service.wellsfargo.com/entity/calendar/2003/"
+	xmlns:ns12="http://service.wellsfargo.com/entity/communication/2003/"
+	xmlns:ns11="http://service.wellsfargo.com/entity/teamMember/2003/"
+	xmlns:ns10="http://service.wellsfargo.com/entity/deliverydevice/2003/"
+	xmlns:ns17="http://service.wellsfargo.com/provider/FSL/site/listSites/2016/08/"
+	xmlns:ns16="http://service.wellsfargo.com/base/2003/"
+	xmlns:ns15="http://service.wellsfargo.com/provider/FSL/site/getSiteDetail/2016/08/"
+	xmlns:ns14="http://service.wellsfargo.com/provider/FSL/site/searchSites/2016/08/">
+	<ns2:WFContext>
+		<ns2:messageId>eb885a80-550f-4f84-926e-0dd0b4e560af</ns2:messageId>
+		<ns2:refToMessageId>d97d5fcf-c4ce-4b9d-bc6a-98098f4e8f52
+		</ns2:refToMessageId>
+		<ns2:sessionId>BE270CF5DB5F176C037859D6480B2607</ns2:sessionId>
+		<ns2:sessionSequenceNumber>BE270CF5DB5F176C037859D6480B2607
+		</ns2:sessionSequenceNumber>
+		<ns2:creationTimestamp>2016-07-14T08:06:44.412-05:00
+		</ns2:creationTimestamp>
+		<ns2:activitySourceId>KN</ns2:activitySourceId>
+		<ns2:activitySourceIdType>FNC</ns2:activitySourceIdType>
+		<ns2:hostName>ruvra00a0002.wellsfargo.com</ns2:hostName>
+		<ns2:billingAU>77022</ns2:billingAU>
+	</ns2:WFContext>
+	<ns2:WFFaultList>
+		<ns2:WFFault>
+			<ns2:faultCode>
+				<value>NotFound</value>
+				<ns2:faultSubcode>
+					<value>NO_MATCHES</value>
+				</ns2:faultSubcode>
+			</ns2:faultCode>
+			<ns2:faultType>APPL</ns2:faultType>
+			<ns2:faultReasonText>No valid responses found for given search
+				criteria</ns2:faultReasonText>
+			<ns2:faultDetail>
+				<severity>WARNING</severity>
+				<adviceText>Resubmit request with expanded Search Criteria
+				</adviceText>
+				<technicalText>No valid responses found for given search criteria
+				</technicalText>
+			</ns2:faultDetail>
+		</ns2:WFFault>
+	</ns2:WFFaultList>
+</ns14:searchSitesResponse>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+    <munit:config name="munit" doc:name="MUnit configuration"/>
+    <spring:beans>
+        <spring:import resource="classpath:sample.xml"/>
+    </spring:beans>
+   <munit:test name="sample-test-suite-FileFlowTest" description="FileFlowTest">
+   		<logger message="Starting....."></logger>
+    	<set-payload value="#[getResource('searchsites-response.xml').asStream()]"/>
+    	<byte-array-to-string-transformer />
+    	<logger message="Payload Response is - #[payload]"/>
+    	<set-variable variableName="RESPONSE" value="#[payload]" doc:name="Variable" />
+    	<munit:set payload="#[getResource('searchsites-request.xml').asStream()]" doc:name="Set Message"/>
+    	<logger message="Payload REquest is - #[payload]"/>
+        <flow-ref name="test" doc:name="Flow-ref to test"/>
+        <munit:assert-not-null message="Not Null Message "></munit:assert-not-null>
+        <logger message="Payload Response is - #[payload]"/>
+        <munit:assert-payload-equals expectedValue="#[flowVars.RESPONSE]" />
+    </munit:test>
+    <munit:test name="sample-test-suite-HTTPFlowTest" description="HTTPFlowTest" ignore="true">
+    	<munit:set payload="city=Puneamp;state=MS"/>
+    	<flow-ref name="http-reqres" doc:name="Flow-ref to test"/>
+    	<munit:assert-payload-equals expectedValue="From Flow" />
+    </munit:test>
+</mule>

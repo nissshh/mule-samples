@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+<mulexml:namespace-manager
+		includeConfigNamespaces="true">
+		<mulexml:namespace prefix="soapenv" uri="http://schemas.xmlsoap.org/soap/envelope/" />
+		<mulexml:namespace prefix="ns2" uri="http://service.wellsfargo.com/entity/message/2003/" />
+		<mulexml:namespace prefix="ns14" uri="http://service.wellsfargo.com/provider/FSL/site/searchSites/2016/08/" /> 
+	</mulexml:namespace-manager>
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+	<flow name="test">
+        <file:inbound-endpoint path="C:\Users\u180362\Desktop\src" moveToDirectory="C:\Users\u180362\Desktop\test" responseTimeout="10000" doc:name="File"/>
+    		<!-- <set-payload value="#[['goodguy':Boolean.valueOf(message.inboundProperties['flag'])]]" doc:name="parse-incoming-query"/> -->
+    		<byte-array-to-string-transformer doc:name="Byte Array to String"/>
+    		<logger message="#[payload]" doc:name="Logger"/>
+    		<logger message="Got Error response from Backend. Error code is #[xpath:/ns14:searchSitesResponse/ns2:WFFaultList/ns2:WFFault/ns2:faultCode/ns2:faultSubcode/value/text()]" doc:name="Logger"/>
+    	    <logger message="#[payload]" doc:name="Copy_of_Logger"/>
+    	    <set-payload value="#[getResource('searchsites-response.xml').asStream()]"/>
+    	    <byte-array-to-string-transformer doc:name="Byte Array to String"/>
+    </flow>
+    <flow name="http-reqres">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/" doc:name="HTTP"/>
+	    <set-payload value="From Flow" doc:name="Set Payload"/>
+    </flow>
+</mule>
