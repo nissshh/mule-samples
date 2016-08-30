@@ -1,2 +1,0 @@
-# mule-samples
-My Practicals
