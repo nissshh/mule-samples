@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch0="http://www.earlywarning.com/aoa/ws/common/v4_0_0" xmlns:sch1="http://www.earlywarning.com/aoa/ws/request/v4_0_0"
+	xmlns:sch2="http://www.earlywarning.com/aoa/ws/response/v4_0_0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.earlywarning.com/aoa/service/v4.0.0"
+	targetNamespace="http://www.earlywarning.com/aoa/service/v4.0.0">
+	<wsdl:types xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:aoacom="http://www.earlywarning.com/aoa/ws/common/v4_0_0" attributeFormDefault="unqualified"
+			elementFormDefault="qualified" targetNamespace="http://www.earlywarning.com/aoa/ws/common/v4_0_0">
+			<xsd:simpleType name="PrimIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="10" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="SecIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="10" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="10" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="UserIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="20" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="RTNType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:maxLength value="9" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{9}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="AcctNoType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="17" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,17}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="FeeAttribType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[A-Z][A-Z]" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="PCTranCodeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:maxLength value="6" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,6}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="AmountType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="12" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,12}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="SerialNoType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="15" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,15}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="FNameType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="40" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="LNameType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="40" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="MNameType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="40" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="NamePfxType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="4" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="NameSfxType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="4" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="BusNameType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="87" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="Address1Type" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="40" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="Address2Type" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="40" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="CityType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="25" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="StateType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:length value="2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[A-Z][A-Z]" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="ZipType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="5" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="10" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{5}(-?[0-9]{4})?" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="HmPhoneType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="10" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[1-9][0-9]{9}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="WkPhoneType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="10" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[1-9][0-9]{9}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="SSNType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:minLength value="4" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="9" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{4,9}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="DOBType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="8" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[12][890][0-9][0-9][01][0-9][0-3][0-9]" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="IDTypeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:length value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="IDNoType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="28" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="IDStateType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="6" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="ClientDtType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="10" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="ClientTimeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="8" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="UserDefType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="255" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="ClientRecIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="20" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="ClientAPIType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:pattern value="[0-9a-zA-Z]{6}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:length value="6" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="SysRecIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="16" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="VersionType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:enumeration value="4.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:length value="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="ProductType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:enumeration value="AOA" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:length value="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="SourceType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:enumeration value="MQ" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:enumeration value="SOAP" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:minLength value="2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="5" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="CondCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,3}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:length value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[CNUY]" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="DataSourceType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="35" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="AccountTypeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[A-Z]{2}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="MtchScoreType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:minInclusive value="0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxInclusive value="100" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="PrimStatusCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,3}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="SecStatusCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,3}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="AddStatusCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,3}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="PrimMessageType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:minLength value="0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="16" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="SecMessageType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:minLength value="0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="16" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="AddMessageType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:minLength value="0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="16" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="NumRetsType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,2}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="LstRetDtType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="4" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,4}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="LstRetReasonType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:maxLength value="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,3}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="StopAmountType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="12" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,12}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="StpBegNoType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="16" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,16}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="StpEndNoType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="16" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,16}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="StpExpDtType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="6" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,6}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="LastUpdateType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="8" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,8}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="AddClosedDtType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="8" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,8}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="PrevStatusType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,3}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="FCRADisputeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:token" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:minLength value="2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9a-zA-Z]{1,2}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="SAReason1Type" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,2}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="SAReason2Type" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,2}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="SAReason3Type" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,2}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="SAReason4Type" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,2}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="SAReason5Type" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{1,2}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="ErrorCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:nonNegativeInteger" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:totalDigits value="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[0-9]{3}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="SignerOwnerMatchType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[A-Z]{1}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="RequestContextType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[A-Z]" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="ResultCodeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:restriction base="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:whiteSpace value="collapse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:maxLength value="5" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:pattern value="[A-Z]" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:schema>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:aoacom="http://www.earlywarning.com/aoa/ws/common/v4_0_0" xmlns:aoareq="http://www.earlywarning.com/aoa/ws/request/v4_0_0"
+			attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.earlywarning.com/aoa/ws/request/v4_0_0">
+			<xsd:import namespace="http://www.earlywarning.com/aoa/ws/common/v4_0_0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+			<xsd:element name="AOARequest" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:complexType xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:sequence xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+						<xsd:element name="Inquiry" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+							<xsd:complexType xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+								<xsd:sequence xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+									<xsd:element minOccurs="0" name="RequestContext" type="aoacom:RequestContextType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element name="PrimID" type="aoacom:PrimIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="SecID" type="aoacom:SecIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID4" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID5" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID6" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID7" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID8" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID9" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID10" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element name="UserID" type="aoacom:UserIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element name="RTN" type="aoacom:RTNType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element name="AcctNo" type="aoacom:AcctNoType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element name="FeeAttrib" type="aoacom:FeeAttribType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="PCTranCode" type="aoacom:PCTranCodeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="Amount" type="aoacom:AmountType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="SerialNo" type="aoacom:SerialNoType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="CreditABA" type="aoacom:RTNType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="CreditAccount" type="aoacom:AcctNoType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AcctOwner" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+										<xsd:complexType xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+											<xsd:sequence xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+												<xsd:element minOccurs="0" name="FName" type="aoacom:FNameType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="LName" type="aoacom:LNameType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="MName" type="aoacom:MNameType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="NamePfx" type="aoacom:NamePfxType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="NameSfx" type="aoacom:NameSfxType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="BusName" type="aoacom:BusNameType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="Address1" type="aoacom:Address1Type" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="Address2" type="aoacom:Address2Type" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="City" type="aoacom:CityType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="State" type="aoacom:StateType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="Zip" type="aoacom:ZipType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="HmPhone" type="aoacom:HmPhoneType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="WkPhone" type="aoacom:WkPhoneType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="SSN" type="aoacom:SSNType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="DOB" type="aoacom:DOBType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="IDType" type="aoacom:IDTypeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="IDNo" type="aoacom:IDNoType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="IDState" type="aoacom:IDStateType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element minOccurs="0" name="Client" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+										<xsd:complexType xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+											<xsd:sequence xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+												<xsd:element minOccurs="0" name="ClientDt" type="aoacom:ClientDtType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="ClientTime" type="aoacom:ClientTimeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="UserDef" type="aoacom:UserDefType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+								<xsd:attribute name="ClientRecID" type="aoacom:ClientRecIDType" use="required" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+								<xsd:attribute name="ClientAPI" type="aoacom:ClientAPIType" use="required" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+					<xsd:attribute name="Version" type="aoacom:VersionType" use="required" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:attribute name="Product" type="aoacom:ProductType" use="required" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:attribute name="Source" type="aoacom:SourceType" use="required" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:aoacom="http://www.earlywarning.com/aoa/ws/common/v4_0_0" xmlns:aoarsp="http://www.earlywarning.com/aoa/ws/response/v4_0_0"
+			attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.earlywarning.com/aoa/ws/response/v4_0_0">
+			<xsd:import namespace="http://www.earlywarning.com/aoa/ws/common/v4_0_0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+			<xsd:element name="AOAResponse" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<xsd:complexType xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsd:sequence xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+						<xsd:element name="Result" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+							<xsd:complexType xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+								<xsd:sequence xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+									<xsd:element minOccurs="0" name="RequestContext" type="aoacom:RequestContextType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element name="ErrorCd" type="aoacom:ErrorCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="PrimID" type="aoacom:PrimIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="SecID" type="aoacom:SecIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID4" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID5" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID6" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID7" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID8" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID9" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AddID10" type="aoacom:AddIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="UserID" type="aoacom:UserIDType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="RTN" type="aoacom:RTNType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AcctNo" type="aoacom:AcctNoType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="FeeAttrib" type="aoacom:FeeAttribType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="PCTranCode" type="aoacom:PCTranCodeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="Amount" type="aoacom:AmountType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="SerialNo" type="aoacom:SerialNoType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="CreditABA" type="aoacom:RTNType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="CreditAccount" type="aoacom:AcctNoType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="DataSource" type="aoacom:DataSourceType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AccountType" type="aoacom:AccountTypeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="AcctOwner" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+										<xsd:complexType xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+											<xsd:sequence xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+												<xsd:element name="CondCd" type="aoacom:CondCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="NameMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="FNameMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="LNameMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="MNameMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="NamePfxMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="NameSfxMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="BusNameMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="FullAddressMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="AddressMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="CityMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="StateMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="ZipMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="HmPhoneMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="WkPhoneMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="SSNMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="DOBMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="IDTypeMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="IDNoMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="IDStateMtch" type="aoacom:MtchCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="OverallMtchScore" type="aoacom:MtchScoreType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="SignerOwnerMatch" type="aoacom:SignerOwnerMatchType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element minOccurs="0" name="AcctStatus" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+										<xsd:complexType xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+											<xsd:sequence xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+												<xsd:element minOccurs="0" name="PrimStatusCd" type="aoacom:PrimStatusCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="SecStatusCd" type="aoacom:SecStatusCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="AddStatusCd" type="aoacom:AddStatusCdType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="PrimMessage" type="aoacom:PrimMessageType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="SecMessage" type="aoacom:SecMessageType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="AddMessage" type="aoacom:AddMessageType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="NumRets" type="aoacom:NumRetsType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="LstRetDt" type="aoacom:LstRetDtType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="LstRetReason" type="aoacom:LstRetReasonType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="StopAmount" type="aoacom:StopAmountType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="StpBegNo" type="aoacom:StpBegNoType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="StpEndNo" type="aoacom:StpEndNoType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="StpExpDt" type="aoacom:StpExpDtType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="LastUpdate" type="aoacom:LastUpdateType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="AddClosedDt" type="aoacom:AddClosedDtType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="PrevStatus" type="aoacom:PrevStatusType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="FCRADispute" type="aoacom:FCRADisputeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="SAReason1" type="aoacom:SAReason1Type" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="SAReason2" type="aoacom:SAReason2Type" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="SAReason3" type="aoacom:SAReason3Type" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="SAReason4" type="aoacom:SAReason4Type" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="SAReason5" type="aoacom:SAReason5Type" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element minOccurs="1" name="ResultCode" type="aoacom:ResultCodeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+									<xsd:element minOccurs="0" name="Client" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+										<xsd:complexType xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+											<xsd:sequence xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+												<xsd:element minOccurs="0" name="ClientDt" type="aoacom:ClientDtType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="ClientTime" type="aoacom:ClientTimeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+												<xsd:element minOccurs="0" name="UserDef" type="aoacom:UserDefType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+								<xsd:attribute name="ClientRecID" type="aoacom:ClientRecIDType" use="optional" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+								<xsd:attribute name="ClientAPI" type="aoacom:ClientAPIType" use="optional" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+								<xsd:attribute name="SysRecID" type="aoacom:SysRecIDType" use="optional" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+					<xsd:attribute name="Version" type="aoacom:VersionType" use="required" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:attribute name="Product" type="aoacom:ProductType" use="optional" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+					<xsd:attribute name="Source" type="aoacom:SourceType" use="optional" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="AOAResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+		<wsdl:part element="sch2:AOAResponse" name="AOAResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="AOARequest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+		<wsdl:part element="sch1:AOARequest" name="AOARequest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="EnhancedAOAInquiryResource" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+		<wsdl:operation name="AOA" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+			<wsdl:input message="tns:AOARequest" name="AOARequest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+			</wsdl:input>
+			<wsdl:output message="tns:AOAResponse" name="AOAResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="EnhancedAOAInquiryResourceSoap11" type="tns:EnhancedAOAInquiryResource" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+		<wsdl:operation name="AOA" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+			<soap:operation soapAction="" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+			<wsdl:input name="AOARequest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+				<soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+			</wsdl:input>
+			<wsdl:output name="AOAResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+				<soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="post" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+		<wsdl:port binding="tns:EnhancedAOAInquiryResourceSoap11" name="EnhancedAOAInquiryResourceSoap11" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+			<soap:address location="https://aoa-ws-direct-cat.earlywarning.com/AOAInquiryService/services/AOAInquiryService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
