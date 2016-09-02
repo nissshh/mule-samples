@@ -5,12 +5,9 @@ import java.util.Map;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import javax.jws.WebParam.Mode;
-import javax.xml.ws.Holder;
 
 import org.apache.log4j.Logger;
 
-import com.wellsfargo.service.entity.message._2007.WFContextType;
 import com.wf.fx.fxaip.model.CurrencyPair;
 import com.wf.fx.fxaip.model.Rate;
 import com.wf.fx.fxaip.service.RateService;
