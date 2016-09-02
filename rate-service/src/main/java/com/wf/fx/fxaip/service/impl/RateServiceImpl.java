@@ -15,7 +15,6 @@ import com.wf.fx.fxaip.model.CurrencyPair;
 import com.wf.fx.fxaip.model.Rate;
 import com.wf.fx.fxaip.service.RateService;
 
-
 public class RateServiceImpl implements RateService {
 
 	private static Logger logger = Logger.getLogger(RateServiceImpl.class);
@@ -34,7 +33,8 @@ public class RateServiceImpl implements RateService {
 		ratesMap.put(new CurrencyPair("GBP", "INR"), new Rate(99.6219, 0.01004));
 	}
 
-	public Rate getRate(CurrencyPair ccy) {
+	@WebMethod(operationName = "getRate", action = "getRate")
+	public Rate getRate(@WebParam(name = "currencyPair") CurrencyPair ccy) {
 		Rate rate = ratesMap.get(ccy);
 		logger.info("Sending Rate - " + rate.getRate());
 		return rate;
@@ -42,24 +42,6 @@ public class RateServiceImpl implements RateService {
 
 	public Map<CurrencyPair, Rate> getRatesMap() {
 		return ratesMap;
-	}
-
-	@WebMethod(operationName = "getRate", action = "getRate")
-	public Rate getRate(
-			@WebParam(name = "WFContext", header = true, partName = "WFContext", targetNamespace="http://service.wellsfargo.com/entity/message/2007/") WFContextType wfContextType,
-			@WebParam(name = "currencyPair") CurrencyPair ccy) {
-		// @WebParam(name = "WFContext_Response", header = true, partName =
-		// "WFContext_Response", mode = Mode.OUT) Holder<WFContextType>
-		// wfContext_Response) {
-
-		logger.info("Header Information : ");
-		logger.info("ApplicationId:" + wfContextType.getApplicationId());
-		logger.info("Originator:" + wfContextType.getOriginator().getOriginatorId());
-		logger.info("SubApplicationId" + wfContextType.getSubApplicationId());
-		logger.info("BillingAU" + wfContextType.getBillingAU());
-		logger.info("CreationTimestamp" + wfContextType.getCreationTimestamp());
-		logger.info("Header Information : ");
-		return getRate(ccy);
 	}
 
 }
