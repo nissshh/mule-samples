@@ -1,14 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.wf.fx.fxaip.sample</groupId>
+	<groupId>com.wf.fx.workshop.service</groupId>
 	<artifactId>rate-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Rate Service Layer</name>
 	<description>This package contains a rates service implemenatation that can be used by any service based project for demonstration purpose only.</description>
-	<properties>
-		<syspath.base>C:\work\install\ide\MuleStudio\plugins\org.mule.tooling.server.3.4.1.ee_3.4.1.201312062152\mule\user</syspath.base>
-	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -21,22 +19,10 @@
 			<version>2.2.11</version>
 		</dependency>
 		<dependency>
-			<groupId>service-worx</groupId>
-			<artifactId>serviceworx-launchpadcore</artifactId>
-			<version>6.0</version>
-			<scope>system</scope>
-			<systemPath>${syspath.base}\serviceworx-launchpadcore-6.0.jar</systemPath>
-		</dependency>
-		<dependency>
 			<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
 			<version>1.8</version>
 		</dependency>
 	</dependencies>
 
-	<!-- <build> <plugins> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>jaxb2-maven-plugin</artifactId> 
-		<version>1.3</version> <executions> <execution> <id>xjc</id> <goals> <goal>xjc</goal> 
-		</goals> <configuration> <schemaFiles>*.xsd</schemaFiles> <schemaDirectory>${project.basedir}/src/main/resources/com/wellsfargo/service/entity/message</schemaDirectory> 
-		<outputDirectory>${project.basedir}/src/main/java</outputDirectory> </configuration> 
-		</execution> </executions> </plugin> </plugins> </build> -->
 </project>
