@@ -1,0 +1,14 @@
+<ser:updateRate xmlns:ser="http://service.fxaip.fx.wf.com/">
+         <!--Optional:-->
+         <currencyPair>
+            <!--Optional:-->
+            <deno>USD</deno>
+            <!--Optional:-->
+            <nume>INR</nume>
+         </currencyPair>
+         <!--Optional:-->
+         <rate>
+            <inRate>0.66</inRate>
+            <rate>66</rate>
+         </rate>
+      </ser:updateRate>

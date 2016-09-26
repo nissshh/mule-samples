@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd">
+	<http:request-config name="HTTP_Request_Config" host="localhost" port="8081" doc:name="HTTP Request Configuration"/>
+	
+	<ws:consumer-config service="RateServiceService" port="RateServicePort" serviceAddress="http://localhost:8081/rates/fx" name="WS_RateService" wsdlLocation="fx-wsdl.wsdl" doc:name="Web Service Consumer"/>
+    <flow name="ratecaptureFlow">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="rateServiceChannel" doc:name="VM-OutboundChannel"/>
+        <logger level="DEBUG" doc:name="Logger"/>
+        <ws:consumer config-ref="WS_RateService" doc:name="Rate Service Consumer" operation="updateRate" />
+        <mulexml:dom-to-xml-transformer doc:name="DOM to XML"/>
+        <logger level="INFO" doc:name="Logger"/>
+    </flow>
+</mule>

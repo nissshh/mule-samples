@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.fxaip.fx.wf.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="RateServiceService" targetNamespace="http://service.fxaip.fx.wf.com/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.fxaip.fx.wf.com/" elementFormDefault="unqualified" targetNamespace="http://service.fxaip.fx.wf.com/" version="1.0">
+
+  <xs:element name="createRate" type="tns:createRate"/>
+
+  <xs:element name="createRateResponse" type="tns:createRateResponse"/>
+
+  <xs:element name="getRate" type="tns:getRate"/>
+
+  <xs:element name="getRateResponse" type="tns:getRateResponse"/>
+
+  <xs:element name="updateRate" type="tns:updateRate"/>
+
+  <xs:element name="updateRateResponse" type="tns:updateRateResponse"/>
+
+  <xs:complexType name="createRate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="currencyPair" type="tns:currencyPair"/>
+      <xs:element minOccurs="0" name="rate" type="tns:rate"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="currencyPair">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="deno" type="xs:string"/>
+      <xs:element minOccurs="0" name="nume" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="rate">
+    <xs:sequence>
+      <xs:element name="inRate" type="xs:double"/>
+      <xs:element name="rate" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createRateResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:rate"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="currencyPair" type="tns:currencyPair"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRateResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:rate"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateRate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="currencyPair" type="tns:currencyPair"/>
+      <xs:element minOccurs="0" name="rate" type="tns:rate"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateRateResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:rate"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="createRateResponse">
+    <wsdl:part element="tns:createRateResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRateResponse">
+    <wsdl:part element="tns:getRateResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateRateResponse">
+    <wsdl:part element="tns:updateRateResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createRate">
+    <wsdl:part element="tns:createRate" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRate">
+    <wsdl:part element="tns:getRate" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateRate">
+    <wsdl:part element="tns:updateRate" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="RateService">
+    <wsdl:operation name="createRate">
+      <wsdl:input message="tns:createRate" name="createRate">
+    </wsdl:input>
+      <wsdl:output message="tns:createRateResponse" name="createRateResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRate">
+      <wsdl:input message="tns:getRate" name="getRate">
+    </wsdl:input>
+      <wsdl:output message="tns:getRateResponse" name="getRateResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateRate">
+      <wsdl:input message="tns:updateRate" name="updateRate">
+    </wsdl:input>
+      <wsdl:output message="tns:updateRateResponse" name="updateRateResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RateServiceServiceSoapBinding" type="tns:RateService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createRate">
+      <soap:operation soapAction="createRate" style="document"/>
+      <wsdl:input name="createRate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createRateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRate">
+      <soap:operation soapAction="getRate" style="document"/>
+      <wsdl:input name="getRate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateRate">
+      <soap:operation soapAction="upadateRate" style="document"/>
+      <wsdl:input name="updateRate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateRateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RateServiceService">
+    <wsdl:port binding="tns:RateServiceServiceSoapBinding" name="RateServicePort">
+      <soap:address location="http://localhost:8081/rates/fx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
