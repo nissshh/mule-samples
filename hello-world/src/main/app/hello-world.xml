@@ -6,12 +6,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
-	<http:listener-config name="httpConnector" port="8081" host="0.0.0.0" />
+	<http:listener-config name="httpConnector" port="8081" host="0.0.0.0" >
+		<http:worker-threading-profile maxThreadsIdle="10" maxBufferSize="5" maxThreadsActive="5" threadTTL="100" threadWaitTimeout="500" poolExhaustedAction="WAIT"/>
+	</http:listener-config>
 	<flow name="hello-worldFlow">
 		<http:listener config-ref="httpConnector" path="/hello"	doc:name="HTTP Inbound Test" allowedMethods="POST"/>
 		<byte-array-to-string-transformer />
-		<logger message="Original #[payload]"  level="INFO"/>
-		<set-payload value="Hello #[payload]"/>
-		<logger message="Response - #[payload]" level="INFO"/>
+		<!-- <logger message="Original #[payload]"  level="INFO"/> -->
+		<set-payload value="#[payload]"/>
+		<logger message="#[payload]" level="INFO"/>
 	</flow>
 </mule>
