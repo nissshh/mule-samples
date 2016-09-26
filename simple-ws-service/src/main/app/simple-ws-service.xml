@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" basePath="rates" doc:name="HTTP Listener Configuration"/>
+    <cxf:configuration name="CXF_Configuration" enableMuleSoapHeaders="true" initializeStaticBusInstance="true" doc:name="CXF Configuration"/>
+    <!-- <db:derby-config name="Derby_Configuration"  doc:name="Derby Configuration" dataSource-ref="dataSourceBean"/> -->
+   <!--  <spring:beans>
+        <spring:bean id="dataSourceBean" name="dataSourceBean" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <spring:property name="driverClassName" value="${spring.datasource.driver-class-name}"/>
+            <spring:property name="username" value="${spring.datasource.username}"/>
+            <spring:property name="password" value="${spring.datasource.password}"/>
+            <spring:property name="url" value="${spring.datasource.url}"/>
+        </spring:bean>
+    </spring:beans> -->
+    <db:generic-config name="Generic_Database_Configuration" driverClassName="org.h2.Driver" doc:name="Generic Database Configuration" url="jdbc:h2:tcp://localhost/~/test;USER=TEST;PASSWORD=TEST;SCHEMA=WORKSHOP">
+    </db:generic-config>
+    <flow name="simple-ws-serviceFlow1">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/temp" doc:name="HTTP" allowedMethods="POST"/>
+        <component class="com.mycompany.service.SimpleLogComponent" doc:name="SimpleLoggingcomponent"/>
+    </flow>
+    <flow name="simple-ws-serviceFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/fx" doc:name="HTTP"/>
+        <cxf:jaxws-service configuration-ref="CXF_Configuration" serviceClass="com.wf.fx.fxaip.service.RateService" doc:name="CXF"/>
+        <component class="com.wf.fx.fxaip.service.impl.RateServiceImpl" doc:name="Java"/>
+    </flow>
+     <!-- 
+    <flow name="simple-ws-serviceFlowWSDL">
+    <http:listener config-ref="HTTP_Listener_Configuration" path="/fxrates" doc:name="HTTP"/>
+        <cxf:jaxws-service configuration-ref="CXF_Configuration" doc:name="CXF-WSDL" port="RateServicePort" service="RateServiceService"/>
+        <flow-ref name="simple-ws-serviceSub_Flow" doc:name="simple-ws-serviceSub_Flow" metadata:id="e9e52cef-82f8-4d87-9eb4-84bf69404fdc"/>
+    </flow>
+    -->
+    <!-- 
+    <sub-flow name="simple-ws-serviceSub_Flow">
+        <logger level="INFO" metadata:id="918267bf-eef6-46a6-b432-13fa400abc02" doc:name="Logger"/>
+        <db:select config-ref="Generic_Database_Configuration" doc:name="Database-GetRates">
+            <db:parameterized-query><![CDATA[SELECT RATE,XRATE FROM rates WHERE CCY=[payload.nume] AND XCCY=[payload.deno]]]></db:parameterized-query>
+        </db:select>
+        <dw:transform-message metadata:id="bcbdb3a2-6105-4e2f-b66b-3f2004333ec4" doc:name="Transform Message">
+            <dw:set-payload>
+            <![CDATA[%dw 1.0
+			%output application/java
+			{
+				inRate: payload.XRATE,
+				rate: payload.RATE
+			} as :object {
+				class : "com.wf.fx.fxaip.model.Rate"
+			}]]>
+		</dw:set-payload>
+        </dw:transform-message>
+    </sub-flow>
+ -->
+</mule>

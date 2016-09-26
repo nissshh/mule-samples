@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.fxaip.fx.wf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getRate>
+         <currencyPair>
+            <deno>USD</deno>
+            <nume>INR</nume>
+         </currencyPair>
+      </ser:getRate>
+   </soapenv:Body>
+</soapenv:Envelope>

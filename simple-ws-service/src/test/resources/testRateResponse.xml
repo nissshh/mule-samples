@@ -1,0 +1,10 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns2:getRateResponse xmlns:ns2="http://service.fxaip.fx.wf.com/">
+         <return>
+            <inRate>0.01616</inRate>
+            <rate>61.8672</rate>
+         </return>
+      </ns2:getRateResponse>
+   </soap:Body>
+</soap:Envelope>
