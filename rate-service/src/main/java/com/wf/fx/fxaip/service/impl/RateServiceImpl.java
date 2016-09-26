@@ -30,8 +30,7 @@ public class RateServiceImpl implements RateService {
 		ratesMap.put(new CurrencyPair("GBP", "INR"), new Rate(99.6219, 0.01004));
 	}
 
-	@WebMethod(operationName = "getRate", action = "getRate")
-	public Rate getRate(@WebParam(name = "currencyPair") CurrencyPair ccy) {
+	public Rate getRate(CurrencyPair ccy) {
 		Rate rate = ratesMap.get(ccy);
 		logger.info("Sending Rate - " + rate.getRate());
 		return rate;
@@ -39,6 +38,18 @@ public class RateServiceImpl implements RateService {
 
 	public Map<CurrencyPair, Rate> getRatesMap() {
 		return ratesMap;
+	}
+
+	@Override
+	public Rate updateRate(CurrencyPair ccyPair, Rate rate) {
+		ratesMap.put(ccyPair,rate);
+		return rate;
+	}
+
+	@Override
+	public Rate createRate(CurrencyPair ccyPair, Rate rate) {
+		ratesMap.put(ccyPair,rate);
+		return rate;
 	}
 
 }
