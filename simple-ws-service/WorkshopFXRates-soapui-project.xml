@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="WorkshopFXRates" soapui-version="4.6.3" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="RateServiceServiceSoapBinding" type="wsdl" bindingName="{http://service.fxaip.fx.wf.com/}RateServiceServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8081/rates/fx?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8081/rates/fx?wsdl"><con:part><con:url>http://localhost:8081/rates/fx?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="RateServiceService" targetNamespace="http://service.fxaip.fx.wf.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.fxaip.fx.wf.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://service.fxaip.fx.wf.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="createRate" type="tns:createRate"/>
+      <xs:element name="createRateResponse" type="tns:createRateResponse"/>
+      <xs:element name="getRate" type="tns:getRate"/>
+      <xs:element name="getRateResponse" type="tns:getRateResponse"/>
+      <xs:element name="updateRate" type="tns:updateRate"/>
+      <xs:element name="updateRateResponse" type="tns:updateRateResponse"/>
+      <xs:complexType name="createRate">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="currencyPair" type="tns:currencyPair"/>
+          <xs:element minOccurs="0" name="rate" type="tns:rate"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="currencyPair">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="deno" type="xs:string"/>
+          <xs:element minOccurs="0" name="nume" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="rate">
+        <xs:sequence>
+          <xs:element name="inRate" type="xs:double"/>
+          <xs:element name="rate" type="xs:double"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createRateResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:rate"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getRate">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="currencyPair" type="tns:currencyPair"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getRateResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:rate"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateRate">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="currencyPair" type="tns:currencyPair"/>
+          <xs:element minOccurs="0" name="rate" type="tns:rate"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateRateResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:rate"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="createRateResponse">
+    <wsdl:part element="tns:createRateResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRateResponse">
+    <wsdl:part element="tns:getRateResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateRateResponse">
+    <wsdl:part element="tns:updateRateResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createRate">
+    <wsdl:part element="tns:createRate" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRate">
+    <wsdl:part element="tns:getRate" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateRate">
+    <wsdl:part element="tns:updateRate" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="RateService">
+    <wsdl:operation name="createRate">
+      <wsdl:input message="tns:createRate" name="createRate"></wsdl:input>
+      <wsdl:output message="tns:createRateResponse" name="createRateResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRate">
+      <wsdl:input message="tns:getRate" name="getRate"></wsdl:input>
+      <wsdl:output message="tns:getRateResponse" name="getRateResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateRate">
+      <wsdl:input message="tns:updateRate" name="updateRate"></wsdl:input>
+      <wsdl:output message="tns:updateRateResponse" name="updateRateResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RateServiceServiceSoapBinding" type="tns:RateService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createRate">
+      <soap:operation soapAction="createRate" style="document"/>
+      <wsdl:input name="createRate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createRateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRate">
+      <soap:operation soapAction="getRate" style="document"/>
+      <wsdl:input name="getRate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateRate">
+      <soap:operation soapAction="upadateRate" style="document"/>
+      <wsdl:input name="updateRate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateRateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RateServiceService">
+    <wsdl:port binding="tns:RateServiceServiceSoapBinding" name="RateServicePort">
+      <soap:address location="http://localhost:8081/rates/fx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://DTCVDI-SS8-0614:8088/mockRateServiceImplServiceSoapBinding</con:endpoint><con:endpoint>http://localhost:8081/rates/fx</con:endpoint></con:endpoints><con:operation isOneWay="false" action="getRate" name="getRate" bindingOperationName="getRate" type="Request-Response" outputName="getRateResponse" inputName="getRate" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8081/rates/fx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.fxaip.fx.wf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getRate>
+         <!--Optional:-->
+         <currencyPair>
+            <!--Optional:-->
+            <deno>USD</deno>
+            <!--Optional:-->
+            <nume>III</nume>
+         </currencyPair>
+      </ser:getRate>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="getRate"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="createRate" name="createRate" bindingOperationName="createRate" type="Request-Response" outputName="createRateResponse" inputName="createRate" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8081/rates/fx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.fxaip.fx.wf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:createRate>
+         <!--Optional:-->
+         <currencyPair>
+            <!--Optional:-->
+            <deno>USD</deno>
+            <!--Optional:-->
+            <nume>ZMR</nume>
+         </currencyPair>
+         <!--Optional:-->
+         <rate>
+            <inRate>0.599999</inRate>
+            <rate>159.99</rate>
+         </rate>
+      </ser:createRate>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="createRate"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="upadateRate" name="updateRate" bindingOperationName="updateRate" type="Request-Response" outputName="updateRateResponse" inputName="updateRate" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8081/rates/fx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.fxaip.fx.wf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:updateRate>
+         <!--Optional:-->
+         <currencyPair>
+            <!--Optional:-->
+            <deno>USD</deno>
+            <!--Optional:-->
+            <nume>INR</nume>
+         </currencyPair>
+         <!--Optional:-->
+         <rate>
+            <inRate>0.66</inRate>
+            <rate>66</rate>
+         </rate>
+      </ser:updateRate>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="upadateRate"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8081/rates/fx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.fxaip.fx.wf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:updateRate>
+         <!--Optional:-->
+         <currencyPair>
+            <!--Optional:-->
+            <deno>USD</deno>
+            <!--Optional:-->
+            <nume>INR</nume>
+         </currencyPair>
+         <!--Optional:-->
+         <rate>
+            <inRate>65.55</inRate>
+            <rate>0.65</rate>
+         </rate>
+      </ser:updateRate>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="upadateRate"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:RestService" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8081" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://localhost:8081</con:endpoint></con:endpoints><con:resource name="Temp" path="/rates/temp"><con:settings/><con:parameters/><con:method name="Temp" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json; charset=windows-1252</con:mediaType><con:status>200</con:status><con:params/></con:representation><con:request name="Request 1" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8081</con:endpoint><con:request>{"test":"This is my request data."}</con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite name="RateServiceImplServiceSoapBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="RateServiceImplServiceSoapBinding TestSuite" searchProperties="true"><con:settings/><con:testStep type="request" name="getRate"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>RateServiceServiceSoapBinding</con:interface><con:operation>getRate</con:operation><con:request name="getRate"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8081/rates/fx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.fxaip.fx.wf.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getRate>
+         <!--Optional:-->
+         <currencyPair>
+            <!--Optional:-->
+            <deno>?</deno>
+            <!--Optional:-->
+            <nume>?</nume>
+         </currencyPair>
+      </ser:getRate>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:wsaConfig action="getRate"/></con:request></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings/><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:properties/></con:testSuite><con:mockService port="8088" path="/mockRateServiceImplServiceSoapBinding" host="DTCVDI-SS8-0614" name="RateServiceImplServiceSoapBinding MockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="getRate" interface="RateServiceServiceSoapBinding" operation="getRate"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns2:getRateResponse xmlns:ns2="http://service.fxaip.fx.wf.com/">
+         <return>
+            <inRate>0.01616</inRate>
+            <rate>61.8672</rate>
+         </return>
+      </ns2:getRateResponse>
+   </soap:Body>
+</soap:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="getRate"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>
