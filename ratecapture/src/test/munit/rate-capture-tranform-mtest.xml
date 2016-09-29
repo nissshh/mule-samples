@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd">
+    <munit:config name="munit" doc:name="MUnit configuration"/>
+    <spring:beans>
+        <spring:import resource="classpath:ratecapture-outbound.xml"/>
+    </spring:beans>
+    <munit:test name="rate-capture-tranform-mtest-ratecapture-transformationFlowTest" description="Test" ignore="true">
+        <munit:set
+			payload="#[getResource('IN_TRANSFORM_TEST.xml').asStream()]"
+			doc:name="Set Message"/>
+		<dw:transform-message doc:name="Transform Message">
+			<dw:set-payload resource="classpath:updateRateType.dwl" />
+		</dw:transform-message>
+        <mulexml:dom-to-xml-transformer doc:name="DOM to XML"/>
+    	<set-session-variable variableName="OUTFILE_DATA" value="#[ratecapture.TestCaseUtils.readFile('OUT_TRANSFORM_TEST.xml')]" doc:name="Variable" />
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+        <munit:assert-on-equals expectedValue="INR"
+			actualValue="#[payload.updateRate.currencyPair.deno]" doc:name="Assert Equals"
+			message="Denominator not correct." />
+		<munit:assert-on-equals expectedValue="USD"
+			actualValue="#[payload.updateRate.currencyPair.nume]" doc:name="Assert Equals"
+			message="Numerator not correct." />
+			
+        <!-- <munit:assert-true condition="#[payload.endsWith('#[sessionVars.OUTFILE_DATA]') ]" doc:name="Assert True"/> -->
+    </munit:test>
+</mule>

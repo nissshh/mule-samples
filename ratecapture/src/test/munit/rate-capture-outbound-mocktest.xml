@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:mock="http://www.mulesoft.org/schema/mule/mock" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/current/mule-mock.xsd
+http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+    <munit:config name="munit" doc:name="MUnit configuration"/>
+    <spring:beans>
+        <spring:import resource="classpath:ratecapture-outbound.xml"/>
+    </spring:beans>
+    <munit:test name="rate-capture-outbound-mocktest-ratecaptureFlowTest" description="Test">
+    <!-- Setup -->
+        <!-- <mock:outbound-endpoint address="http://localhost:8081/rates/fx" returnPayload="#[sessionVars.MOCK_PAYLOAD]"/> -->
+        <set-session-variable value="#[ratecapture.TestCaseUtils.readFile('OUTFILE_TEST.xml')]" variableName="MOCK_PAYLOAD" doc:name="Session Variable" />
+        <mock:when messageProcessor="ws:consumer" doc:name="Mock">
+        	<mock:with-attributes>
+        		<mock:with-attribute name="operation" whereValue="updateRate"/>
+        	</mock:with-attributes>
+        	<mock:then-return payload="#[sessionVars.MOCK_PAYLOAD]"/>
+        </mock:when>
+        <set-payload value="#[ratecapture.TestCaseUtils.readFile('IN_TRANSFORM_TEST.xml')]" doc:name="Set Payload" mimeType="application/xml"/>
+        <logger level="INFO" message="Sending Payload as #[payload]" doc:name="Logger"/>
+    <!--  Execute -->
+    	<flow-ref name="ratecaptureFlow" doc:name="ratecaptureFlow"/>
+    <!--  Verify -->
+        <munit:assert-not-null message="#[payload]" doc:name="Assert Not Null Payload"></munit:assert-not-null>
+    	<logger message="Response as = #[payload]" level="INFO" doc:name="Logger"/>
+        <munit:assert-payload-equals expectedValue="#[sessionVars.MOCK_PAYLOAD]" doc:name="Assert Payload"></munit:assert-payload-equals>
+    </munit:test>
+</mule>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd">
@@ -8,14 +10,16 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
     <spring:beans>
         <spring:import resource="classpath:ratecapture-outbound.xml"/>
     </spring:beans>
-    <munit:test name="new-test-suite-ratecaptureFlowTest" description="Test">
+    <munit:test name="new-test-suite-ratecaptureFlowTest" description="Test" ignore="true">
     	<set-payload value="#[ratecapture.TestCaseUtils.readFile('INFILE_TEST.xml')]" doc:name="Set Payload"/>
     	<set-session-variable variableName="OUTFILE_DATA" value="#[ratecapture.TestCaseUtils.readFile('OUTFILE_TEST.xml')]" doc:name="Variable" />
     	<logger level="INFO" message="Sending Payload as #[payload]" doc:name="Logger"/>
-        <flow-ref name="ratecaptureFlow" doc:name="ratecaptureFlow"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload resource="classpath:updateRateType.dwl"/>
+        </dw:transform-message>
         <logger message="#[payload]" level="INFO" doc:name="Logger"/>
         <munit:assert-not-null message="#[payload]" doc:name="Assert Not Null Payload" metadata:id="5fc0e9ef-894e-40e1-a037-b5e3522b243c"></munit:assert-not-null>
-        <munit:assert-payload-equals expectedValue="#[flowVars.OUTFILE_DATA]" doc:name="Assert Payload"></munit:assert-payload-equals>
+        <munit:assert-payload-equals expectedValue="#[sessionVars.OUTFILE_DATA]" doc:name="Assert Payload"></munit:assert-payload-equals>
         <!-- <mulexml:jaxb-xml-to-object-transformer jaxbContext-ref="" doc:name="XML to JAXB Object"/> -->
     </munit:test>
 </mule>

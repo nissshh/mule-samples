@@ -1,0 +1,10 @@
+<ns0:updateRate xmlns:ns0="http://service.fxaip.fx.wf.com/">
+  <currencyPair>
+    <deno>INR/USD</deno>
+    <nume>INR/USD</nume>
+  </currencyPair>
+  <rate>
+    <rate>69.7803</rate>
+    <inRate>0.01433</inRate>
+  </rate>
+</ns0:updateRate>
