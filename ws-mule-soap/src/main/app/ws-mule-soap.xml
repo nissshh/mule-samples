@@ -20,8 +20,8 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 	<cxf:configuration name="CXF_Configuration"
 		enableMuleSoapHeaders="true" initializeStaticBusInstance="true"
 		doc:name="CXF Configuration" />
-	 <ws:consumer-config name="WS_Consumer_site201608" wsdlLocation="schema/fsl/com/wellsfargo/service/provider/FSL/site/site201608.wsdl" service="SiteService" port="site" serviceAddress="http://localhost:17013/sb-locations/sandbox-service" doc:name="Consumer for Site Service" connectorConfig="HTTP_Request_Configuration"/>
-     <ws:consumer-config name="WS_Consumer_outlet201608" wsdlLocation="schema/fsl/com/wellsfargo/service/provider/FSL/outlet/outlet201608.wsdl" service="OutletService" port="outlet" serviceAddress="http://localhost:17013/sb-locations/sandbox-service" doc:name="Consumer for Outlet Service" connectorConfig="HTTP_Request_Configuration"/>
+	 <ws:consumer-config name="WS_Consumer_site201608" wsdlLocation="schema/fsl/com/wf/service/provider/FSL/site/site201608.wsdl" service="SiteService" port="site" serviceAddress="http://localhost:17013/sb-locations/sandbox-service" doc:name="Consumer for Site Service" connectorConfig="HTTP_Request_Configuration"/>
+     <ws:consumer-config name="WS_Consumer_outlet201608" wsdlLocation="schema/fsl/com/wf/service/provider/FSL/outlet/outlet201608.wsdl" service="OutletService" port="outlet" serviceAddress="http://localhost:17013/sb-locations/sandbox-service" doc:name="Consumer for Outlet Service" connectorConfig="HTTP_Request_Configuration"/>
 	
 	<flow name="hostServiceFlow">
 		<http:listener config-ref="HTTPS_Baas_Listener" path="/"

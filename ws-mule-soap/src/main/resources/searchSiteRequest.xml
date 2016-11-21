@@ -1,8 +1,8 @@
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://service.wellsfargo.com/provider/FSL/site/searchSites/2016/08/" xmlns:ns1="http://service.wellsfargo.com/entity/message/2003/" xmlns:ns2="http://service.wellsfargo.com/entity/communication/address/2003/" xmlns:ns3="http://service.wellsfargo.com/entity/outlet/2003/" xmlns:ns4="http://service.wellsfargo.com/entity/communication/phone/2003/">
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://service.wf.com/provider/FSL/site/searchSites/2016/08/" xmlns:ns1="http://service.wf.com/entity/message/2003/" xmlns:ns2="http://service.wf.com/entity/communication/address/2003/" xmlns:ns3="http://service.wf.com/entity/outlet/2003/" xmlns:ns4="http://service.wf.com/entity/communication/phone/2003/">
   <soapenv:Header/>
   <soapenv:Body>
     <ns:searchSites>
-      <ns1:WFContext xmlns:ns1="http://service.wellsfargo.com/entity/message/2003/">
+      <ns1:WFContext xmlns:ns1="http://service.wf.com/entity/message/2003/">
         <ns1:messageId>d97d5fcf-c4ce-4b9d-bc6a-98098f4e8f52</ns1:messageId>
         <ns1:sessionId>BE270CF5DB5F176C037859D6480B2607</ns1:sessionId>
         <ns1:sessionSequenceNumber>1</ns1:sessionSequenceNumber>

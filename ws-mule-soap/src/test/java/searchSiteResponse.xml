@@ -1,6 +1,6 @@
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
    <soap:Body>
-      <ns16:searchSitesResponse xmlns:ns2="http://service.wellsfargo.com/entity/message/2003/" xmlns:ns3="http://service.wellsfargo.com/entity/communication/address/2003/" xmlns:ns4="http://service.wellsfargo.com/entity/outlet/2003/" xmlns:ns5="http://service.wellsfargo.com/entity/communication/phone/2003/" xmlns:ns6="http://service.wellsfargo.com/entity/site/2003/" xmlns:ns7="http://service.wellsfargo.com/provider/FSL/shared/2016/" xmlns:ns8="http://service.wellsfargo.com/entity/product/2003/" xmlns:ns9="http://service.wellsfargo.com/entity/calendar/2003/" xmlns:ns10="http://service.wellsfargo.com/entity/deliverydevice/2003/" xmlns:ns11="http://service.wellsfargo.com/entity/teamMember/2003/" xmlns:ns12="http://service.wellsfargo.com/entity/communication/2003/" xmlns:ns13="http://service.wellsfargo.com/entity/communication/email/2003/" xmlns:ns14="http://service.wellsfargo.com/provider/FSL/site/listSites/2016/08/" xmlns:ns15="http://service.wellsfargo.com/base/2003/" xmlns:ns16="http://service.wellsfargo.com/provider/FSL/site/searchSites/2016/08/" xmlns:ns17="http://service.wellsfargo.com/provider/FSL/site/getSiteDetail/2016/08/">
+      <ns16:searchSitesResponse xmlns:ns2="http://service.wf.com/entity/message/2003/" xmlns:ns3="http://service.wf.com/entity/communication/address/2003/" xmlns:ns4="http://service.wf.com/entity/outlet/2003/" xmlns:ns5="http://service.wf.com/entity/communication/phone/2003/" xmlns:ns6="http://service.wf.com/entity/site/2003/" xmlns:ns7="http://service.wf.com/provider/FSL/shared/2016/" xmlns:ns8="http://service.wf.com/entity/product/2003/" xmlns:ns9="http://service.wf.com/entity/calendar/2003/" xmlns:ns10="http://service.wf.com/entity/deliverydevice/2003/" xmlns:ns11="http://service.wf.com/entity/teamMember/2003/" xmlns:ns12="http://service.wf.com/entity/communication/2003/" xmlns:ns13="http://service.wf.com/entity/communication/email/2003/" xmlns:ns14="http://service.wf.com/provider/FSL/site/listSites/2016/08/" xmlns:ns15="http://service.wf.com/base/2003/" xmlns:ns16="http://service.wf.com/provider/FSL/site/searchSites/2016/08/" xmlns:ns17="http://service.wf.com/provider/FSL/site/getSiteDetail/2016/08/">
          <ns2:WFContext>
             <ns2:messageId>6745354b-afff-4af6-9704-59174123d703</ns2:messageId>
             <ns2:refToMessageId>d97d5fcf-c4ce-4b9d-bc6a-98098f4e8f52</ns2:refToMessageId>
@@ -9,7 +9,7 @@
             <ns2:creationTimestamp>2016-08-29T11:47:31.578-05:00</ns2:creationTimestamp>
             <ns2:activitySourceId>KN</ns2:activitySourceId>
             <ns2:activitySourceIdType>FNC</ns2:activitySourceIdType>
-            <ns2:hostName>ruvra00a0001.wellsfargo.com</ns2:hostName>
+            <ns2:hostName>ruvra00a0001.wf.com</ns2:hostName>
             <ns2:billingAU>77022</ns2:billingAU>
          </ns2:WFContext>
          <info>
